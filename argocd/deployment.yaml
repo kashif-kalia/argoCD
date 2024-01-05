@@ -1,36 +1,19 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Rollout
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: rollouts-demo
+  name: nginx-deployment
 spec:
-  replicas: 1
-  strategy:
-    canary:
-      canaryService: rollouts-demo-canary
-      stableService: rollouts-demo-stable
-      trafficRouting:
-        nginx:
-          stableIngress: rollouts-demo-stable
-      steps:
-      - setWeight: 5
-      - pause: {}
-  revisionHistoryLimit: 2
+  replicas: 3  # Number of NGINX pods to run
   selector:
     matchLabels:
-      app: rollouts-demo
+      app: nginx
   template:
     metadata:
       labels:
-        app: rollouts-demo
+        app: nginx
     spec:
       containers:
-      - name: rollouts-demo
-        image: argoproj/rollouts-demo:blue
+      - name: nginx
+        image: nginx:latest  # NGINX container image
         ports:
-        - name: http
-          containerPort: 8080
-          protocol: TCP
-        resources:
-          requests:
-            memory: 32Mi
-            cpu: 5m
+        - containerPort: 80  # Port the NGINX container listens on
