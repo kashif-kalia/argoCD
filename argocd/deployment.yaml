@@ -1,9 +1,14 @@
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
 metadata:
   name: nginx-deployment
 spec:
   replicas: 5  # Number of NGINX pods to run
+  canary:
+      steps:
+      - setWeight: 5
+      - pause: {duration: 40s}
+  revisionHistoryLimit: 2
   selector:
     matchLabels:
       app: nginx
