@@ -4,7 +4,7 @@ metadata:
   name: nginx-service
 spec:
   selector:
-    app: rollouts-demo
+    app: nginx
   ports:
     - protocol: TCP
       port: 80  # Port exposed by the Service
