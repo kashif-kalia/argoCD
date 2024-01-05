@@ -13,17 +13,16 @@ spec:
         app: nginx
     spec:
       containers:
-      - name: nginx
-        image: nginx:latest  # NGINX container image
-        ports:
-        - containerPort: 80  # Port the NGINX container listens on
+        - name: nginx
+          image: nginx:latest  # NGINX container image
+          ports:
+            - containerPort: 80  # Port the NGINX container listens on
   strategy:
     canary:
-      canaryService: auth-svc    # This field is optional we can remove too.
-        steps:  
-          - setWeight: 20
-          - pause:  
-             duration: "30"
-          - setWeight: 80
-          - pause: {}  
-      
+      canaryService: auth-svc  # Optional field
+      steps:  
+        - setWeight: 20
+        - pause: 
+            duration: "30"
+        - setWeight: 80
+        - pause: {}
