@@ -5,7 +5,7 @@ kind: Rollout
 metadata:
   name: nginx-deployment
 spec:
-  replicas: 4  # Number of NGINX pods to run
+  replicas: 6  # Number of NGINX pods to run
   revisionHistoryLimit: 2
   selector:
     matchLabels:
