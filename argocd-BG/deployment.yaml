@@ -1,24 +1,23 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Rollout
 metadata:
-  name: blue
+  name: apache
   namespace: apache-ns
 spec:
   template:
     metadata: 
       labels:
-        name: blue
+        app: apache
     spec:
       containers: 
-      - name: blue   
+      - name: apache   
         image: httpd:latest
   selector:
     matchLabels:
-      name: blue
+      app: apache
   replicas: 4
   strategy:
     blueGreen: 
       activeService: rollout-bluegreen-active
-    #  previewService: rollout-bluegreen-preview
+   #   previewService: rollout-bluegreen-preview
       autoPromotionEnabled: false
-
