@@ -17,10 +17,15 @@ spec:
       app: apache
   replicas: 10
   strategy:
-    canary:
-      steps:
-        - setWeight: 40
-        - pause:  
-            duration: "20s"
-        - setWeight: 60
-        - pause: {}
+    blueGreen: 
+      activeService: rollout-bluegreen-active
+      previewService: rollout-bluegreen-preview
+      autoPromotionEnabled: false
+  # strategy:
+  #   canary:
+  #     steps:
+  #       - setWeight: 40
+  #       - pause:  
+  #           duration: "20s"
+  #       - setWeight: 60
+  #       - pause: {}
