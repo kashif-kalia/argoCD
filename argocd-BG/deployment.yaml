@@ -11,7 +11,7 @@ spec:
     spec:
       containers: 
       - name: apache   
-        image: httpd:2.4
+        image: nginx:latest
   selector:
     matchLabels:
       app: apache
