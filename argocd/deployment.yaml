@@ -1,27 +1,26 @@
 apiVersion: argoproj.io/v1alpha1
-#apiVersion: apps/v1
 kind: Rollout
-#kind:  Deployment
 metadata:
-  name: nginx-deployment
+  name: apache
+  namespace: apache-ns
 spec:
-  replicas: 6  # Number of NGINX pods to run
-  revisionHistoryLimit: 2
+  template:
+    metadata: 
+      labels:
+        app: apache
+    spec:
+      containers: 
+      - name: apache   
+        image: httpd:2.4.5
   selector:
     matchLabels:
-      app: nginx
-  template:
-    metadata:
-      labels:
-        app: nginx
-    spec:
-      containers:
-      - name: nginx
-        image: nginx:stable-perl  # NGINX container image
-        ports:
-        - containerPort: 80  # Port the NGINX container listens on
-  strategy:  
+      app: apache
+  replicas: 10
+  strategy:
     canary:
       steps:
-      - setWeight: 50
-      - pause: {duration: 40s}
+      - setWeight: 40
+          - pause:  
+             duration: "20s"
+          - setWeight: 60
+          - pause: {}  #Rollouts can be manually resumed by running "kubectl argo rollouts promote ROLLOUT" 
