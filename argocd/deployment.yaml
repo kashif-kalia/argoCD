@@ -1,7 +1,7 @@
-#apiVersion: argoproj.io/v1alpha1
-apiVersion: apps/v1
-#kind: Rollout
-kind:  Deployment
+apiVersion: argoproj.io/v1alpha1
+#apiVersion: apps/v1
+kind: Rollout
+#kind:  Deployment
 metadata:
   name: nginx-deployment
 spec:
@@ -20,8 +20,8 @@ spec:
         image: nginx:stable-perl  # NGINX container image
         ports:
         - containerPort: 80  # Port the NGINX container listens on
-  #strategy:  
-    # canary:
-    #   steps:
-    #   - setWeight: 5
-    #   - pause: {duration: 40s}
+  strategy:  
+    canary:
+      steps:
+      - setWeight: 50
+      - pause: {duration: 40s}
