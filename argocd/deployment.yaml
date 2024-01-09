@@ -19,8 +19,8 @@ spec:
   strategy:
     canary:
       steps:
-      - setWeight: 40
-          - pause:  
-             duration: "20s"
-          - setWeight: 60
-          - pause: {}  #Rollouts can be manually resumed by running "kubectl argo rollouts promote ROLLOUT" 
+        - setWeight: 40
+        - pause:  
+            duration: "20s"
+        - setWeight: 60
+        - pause: {}
