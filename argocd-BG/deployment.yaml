@@ -21,3 +21,28 @@ spec:
       activeService: rollout-bluegreen-active
       previewService: rollout-bluegreen-preview
       autoPromotionEnabled: false
+---
+
+apiVersion: argoproj.io/v1alpha1
+kind: Rollout
+metadata:
+  name: apache
+  namespace: apache-ns
+spec:
+  template:
+    metadata: 
+      labels:
+        app: apache1
+    spec:
+      containers: 
+      - name: apache   
+        image: httpd:latest
+  selector:
+    matchLabels:
+      app: apache1
+  replicas: 4
+  strategy:
+    blueGreen: 
+      activeService: rollout-bluegreen-active
+      previewService: rollout-bluegreen-preview
+      autoPromotionEnabled: false
