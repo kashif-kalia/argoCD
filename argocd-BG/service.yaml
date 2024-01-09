@@ -30,7 +30,7 @@ metadata:
   namespace: apache-ns
 spec:
   selector:
-    app: apache1
+    app: apache
   ports:
     - protocol: TCP
       port: 80
