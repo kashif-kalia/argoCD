@@ -1,3 +1,15 @@
+# apiVersion: v1
+# kind: Service
+# metadata:
+#   name: rollout-bluegreen-active
+#   namespace: apache-ns
+# spec:
+#   selector:
+#      app: apache
+#   ports:
+#     - name: http
+#       port: 80  # Port exposed by the Service
+#       targetPort: 80
 apiVersion: v1
 kind: Service
 metadata:
@@ -5,8 +17,8 @@ metadata:
   namespace: apache-ns
 spec:
   selector:
-     app: apache
+    app: apache
   ports:
-    - name: http
-      port: 80  # Port exposed by the Service
+    - protocol: TCP
+      port: 80
       targetPort: 80
