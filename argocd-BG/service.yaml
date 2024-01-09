@@ -5,7 +5,7 @@ metadata:
   namespace: apache-ns
 spec:
   selector:
-    name: blue
+    name: rollout-bluegreen-active
   ports:
     - name: http
       port: 80  # Port exposed by the Service
